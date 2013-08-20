@@ -564,7 +564,11 @@ stack points ->	| addr of DOUBLE   |	   + 4 =   +------------------+
 	.text
 	.globl _start
 _start:
-	cld
+	nop                     // gdb has a bug that it cannot put a breakpoint on _start
+                                // so we put a NOP in so we can "b *_start+1" in gdb
+	cld                     // don't know why this is here - assume OS may (sometimes?)
+                                // set flags or leave them set by ELF load or BIOS boot
+
 	mov %esp,var_S0		// Save the initial data stack pointer in FORTH variable S0.
 	mov $return_stack_top,%ebp // Initialise the return stack.
 	call set_up_data_segment

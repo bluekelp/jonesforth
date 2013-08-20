@@ -1,4 +1,5 @@
-# $Id: Makefile,v 1.9 2007-10-22 18:53:12 rich Exp $
+.SUFFIXES: .f .test
+.PHONY: test check run run_perf_dupdrop
 
 #BUILD_ID_NONE := -Wl,--build-id=none 
 BUILD_ID_NONE := 
@@ -39,12 +40,3 @@ perf_dupdrop: perf_dupdrop.c
 
 run_perf_dupdrop: jonesforth
 	cat <(echo ': TEST-MODE ;') jonesforth.f perf_dupdrop.f | ./jonesforth
-
-.SUFFIXES: .f .test
-.PHONY: test check run run_perf_dupdrop
-
-remote:
-	scp jonesforth.S jonesforth.f rjones@oirase:Desktop/
-	ssh rjones@oirase sh -c '"rm -f Desktop/jonesforth; \
-	  gcc -m32 -nostdlib -static -Wl,-Ttext,0 -o Desktop/jonesforth Desktop/jonesforth.S; \
-	  cat Desktop/jonesforth.f - | Desktop/jonesforth arg1 arg2 arg3"'

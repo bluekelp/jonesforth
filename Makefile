@@ -8,9 +8,9 @@ SHELL	:= /bin/bash
 all:	jonesforth
 
 jonesforth: jonesforth.S
-	gcc -m32 -nostdlib -static -Wl,-Ttext,0 $(BUILD_ID_NONE) -o $@ $<
+	gcc -m32 -nostdlib -static $(BUILD_ID_NONE) -o $@ $<
 
-run:
+run: jonesforth
 	cat jonesforth.f $(PROG) - | ./jonesforth
 
 clean:

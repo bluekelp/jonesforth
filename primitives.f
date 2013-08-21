@@ -25,6 +25,14 @@
         -ROT    \ ( a a b b -- a b a b )
         ;
 
+\ ( a b c d -- c d a b )
+: 2SWAP
+        ROT     \ ( a b c d -- a c d b |   --   )
+        >R      \ ( a c d b -- a c d   |   -- b )
+        ROT     \ ( a c d   -- c d a   |   --   )
+        R>      \ ( c d a   -- c d a b | b --   )
+        ;
+
 \ ( a b -- (a-b) )
 : -
         INVERT

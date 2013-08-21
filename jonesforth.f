@@ -677,6 +677,11 @@
 	DODOES , 0 ,	( append DOCOL (the codeword field of this word) )
 ;
 
+: >DFA
+	>CFA
+	4 +
+;
+
 : DOES>
 	R> LATEST @ >DFA !
 ;

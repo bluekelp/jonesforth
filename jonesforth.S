@@ -1646,10 +1646,6 @@ _TCFA:
         You can see that >DFA is easily defined in FORTH just by adding 4 to the result of >CFA.
 */
 
-        defword ">DFA",4,,TDFA
-        .int TCFA               // >CFA         (get code field address)
-        .int INCR4              // 4+           (add 4 to it to get to next word)
-        .int EXIT               // EXIT         (return from FORTH word)
 
 /*
         COMPILING ----------------------------------------------------------------------

@@ -1899,6 +1899,13 @@ DECIMAL
 	(INLINE)
 ;
 
+( hides the next word encountered from (FIND) )
+: HIDE
+    WORD
+    (FIND)
+    HIDDEN
+;
+
 HIDE =NEXT
 
 (

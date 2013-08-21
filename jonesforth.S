@@ -1839,12 +1839,6 @@ _COMMA:
         xorb $F_HIDDEN,(%edi)   // Toggle the HIDDEN bit.
         NEXT
 
-        defword "HIDE",4,,HIDE
-        .int WORD               // Get the word (after HIDE).
-        .int PAREN_FIND         // Look up in the dictionary.
-        .int HIDDEN             // Set F_HIDDEN flag.
-        .int EXIT               // Return.
-
 /*
         ['] (BRACKET_TICK) is a standard FORTH word which returns the codeword pointer of the next word.
 

@@ -27,14 +27,9 @@
 
 \ ( a b -- a b a b )
 : 2DUP
-        DUP     \ ( a b   -- a b b   |     --     )
-        >R      \ ( a b b -- a b     |     -- b   )
-        SWAP    \ ( a b   -- b a     | b   -- b   )
-        DUP     \ ( b a   -- b a a   | b   -- b   )
-        >R      \ ( b a a -- b a     | b   -- b a )
-        SWAP    \ ( b a   -- a b     | b a -- b a )
-        R>      \ ( a b   -- a b a   | b a -- b   )
-        R>      \ ( a b a -- a b a b | b   --     )
+        OVER
+        OVER
+        ;
 
 \ ( a b c d -- c d a b )
 : 2SWAP

@@ -716,15 +716,6 @@ code_\label :                   // assembler code follows
         push %eax               // and push it on top
         NEXT
 
-        defcode "ROT",3,,ROT
-        pop %eax
-        pop %ebx
-        pop %ecx
-        push %ebx
-        push %eax
-        push %ecx
-        NEXT
-
         defcode "?DUP",4,,QDUP  // duplicate top of stack if non-zero
         movl (%esp),%eax
         test %eax,%eax
@@ -2249,8 +2240,20 @@ interpret_is_lit:
 #ifdef OPTIMIZE_SPEED
         /**
          * The following words can be implemented in Forth with a slight performance
-         * penalty but at the expense of a larger kernel.
+         * penalty but result in a smaller kernel.
+         *
+         * Implemting them in assembly makes them faster but increases kernel size.
          */
+
+        defcode "ROT",3,,ROT
+        pop %eax
+        pop %ebx
+        pop %ecx
+        push %ebx
+        push %eax
+        push %ecx
+        NEXT
+
 
         // ( a b c -- c a b )
         defcode "-ROT",4,,NROT

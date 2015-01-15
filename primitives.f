@@ -3,6 +3,14 @@
 \                   (these can all be code-words for speed - see OPTIMIZE_SPEED in jonesforth.S)
 \
 
+\ ( a b c -- b c a )
+: ROT
+        >R      \ ( a b c -- a b   |   -- c )
+        SWAP    \ ( a b   -- b a   | c -- c )
+        R>      \ ( b a   -- b a c | c --   )
+        SWAP    \ ( b a c -- b c a |   --   )
+        ;
+
 \ ( a b c -- c a b )
 : -ROT
         ROT     \ ( a b c -- b c a )

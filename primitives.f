@@ -13,8 +13,10 @@
 
 \ ( a b c -- c a b )
 : -ROT
-        ROT     \ ( a b c -- b c a )
-        ROT     \ ( b c a -- c a b )
+        SWAP    \ ( a b c -- a c b |   --   )
+        >R      \ ( a c b -- a c   |   -- b )
+        SWAP    \ ( a c   -- c a   | b -- b )
+        R>      \ ( c a   -- c a b | b --   )
         ;
 
 \ ( a b -- )
@@ -25,13 +27,14 @@
 
 \ ( a b -- a b a b )
 : 2DUP
-        SWAP    \ ( a b -- b a )
-        DUP     \ ( b a -- b a a )
-        -ROT    \ ( b a a -- a b a )
-        SWAP    \ ( a b a -- a a b )
-        DUP     \ ( a a b -- a a b b )
-        -ROT    \ ( a a b b -- a b a b )
-        ;
+        DUP     \ ( a b   -- a b b   |     --     )
+        >R      \ ( a b b -- a b     |     -- b   )
+        SWAP    \ ( a b   -- b a     | b   -- b   )
+        DUP     \ ( b a   -- b a a   | b   -- b   )
+        >R      \ ( b a a -- b a     | b   -- b a )
+        SWAP    \ ( b a   -- a b     | b a -- b a )
+        R>      \ ( a b   -- a b a   | b a -- b   )
+        R>      \ ( a b a -- a b a b | b   --     )
 
 \ ( a b c d -- c d a b )
 : 2SWAP
